@@ -3,12 +3,21 @@ from click import command
 import psycopg2
 import csv
 import sys
+import flask
+'''
+from flask import Flask, render_template
 
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return render_template('index.html')
+'''
 conn = psycopg2.connect(
     host = "localhost",
-    database = "cse460",
+    database = "postgres",
     user = "postgres",
-    password = "postgres"
+    password = "123"
     )
 cursor = conn.cursor()
 commands = [
@@ -141,12 +150,17 @@ if __name__ == '__main__':
     # wirter and director - python3 app.py people /Users/mengyuan/Downloads/MovieData/title.crew.tsv
     # people info - python3 app.py info /Users/mengyuan/Downloads/MovieData/name.basics.tsv
     # movie - python3 app.py movie /Users/mengyuan/Downloads/MovieData/title.basics.tsv
+
+    print(sys.argv)
     table = sys.argv[1]
     path = sys.argv[2]
     
     create_table()
     insert_data(table, path)
-    
+    '''
+    app.run(host='0.0.0.0', port=8899)
+    app.run(debug=True)
+    '''
 
 
 
