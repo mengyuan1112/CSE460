@@ -33,12 +33,12 @@ commands = [
     """
     CREATE TABLE IF NOT EXISTS Movie(
         tconst VARCHAR(255) UNIQUE,
-        startYear VARCHAR(255),
+        startYear INTEGER,
         primaryTitle VARCHAR(255),
-        runtimeMinutes VARCHAR(255),
-        averageRating VARCHAR(255),
-        numVotes VARCHAR(255),
-        isAdult VARCHAR(255),
+        runtimeMinutes Integer,
+        averageRating FLOAT,
+        numVotes Integer,
+        isAdult INTEGER,
         genres VARCHAR(255),
         directors VARCHAR(255),
         writers VARCHAR(255),
@@ -62,9 +62,13 @@ def insert_data():
         next(tsv_file)
         count = 0
         for i in tsv_file:
+            try:
+                runtime = int(i[7])
+            except:
+                runtime = None
             count += 1
             sql = 'insert into Movie (tconst, primaryTitle, isAdult, startYear, runtimeMinutes, genres) values (%s,%s,%s,%s,%s,%s)'
-            val = (i[0], i[2], i[4], i[5], i[7], i[8])
+            val = (i[0], i[2], int(i[4]), int(i[5]), runtime, i[8])
             cursor.execute(sql, val)
             conn.commit()
             if count == 300:
@@ -87,6 +91,10 @@ def insert_data():
         count = 0
         for i in tsv_file:
             count += 1
+            if(i[1]=="\\N"):
+                i[1]=None
+            if (i[2] == "\\N"):
+                i[2] = None
             sql = 'Update Movie set directors=%s, writers=%s where tconst=%s'
             val = (i[1], i[2], i[0])
             cursor.execute(sql, val)
@@ -99,8 +107,16 @@ def insert_data():
         count = 0
         for i in tsv_file:
             count += 1
+            try:
+                averageRating=float(i[1])
+            except:
+                averageRating=None
+            try:
+                numVotes=int(i[2])
+            except:
+                numVotes=None
             sql = 'Update Movie set averageRating=%s, numVotes=%s where tconst=%s'
-            val = (i[1], i[2], i[0])
+            val = (averageRating, numVotes, i[0])
             cursor.execute(sql, val)
             conn.commit()
             if count == 300:
