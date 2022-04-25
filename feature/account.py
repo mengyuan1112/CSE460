@@ -53,3 +53,52 @@ def register(username,password):
     cursor.execute(query, (username,password))
     conn.commit()
     return "success"
+
+def update(username,password, new_password):
+    conn = psycopg2.connect(
+        host="localhost",
+        database="postgres",
+        user="postgres",
+        password="123"
+    )
+    cursor = conn.cursor()
+    # check user is created before
+    query = "Select * from Users where username=%s"
+    cursor.execute(query,(username,))
+    checkName = cursor.fetchall()
+    query = "Select * from Users where password=%s"
+    cursor.execute(query,(password,))
+    checkName = cursor.fetchall()
+    # return False if not exist
+    if (len(checkName)==0):
+        return "account not exists"
+
+    # update account with input
+    query = "Update Users Set password = %s Where username=%s"
+    cursor.execute(query, (new_password, username))
+    conn.commit()
+    return "success"
+
+def delete(username,password):
+    print(username + " , "+ password)
+    conn = psycopg2.connect(
+        host="localhost",
+        database="postgres",
+        user="postgres",
+        password="123"
+    )
+    cursor = conn.cursor()
+
+    # check user is created before
+    query = "Select * from Users where username=%s"
+    cursor.execute(query,(username,))
+    checkName = cursor.fetchall()
+    # return False if not exist
+    if (len(checkName)==0):
+        return "account not exists"
+
+    # create account with input
+    query = "Delete from Users where username=%s"
+    cursor.execute(query, (username,))
+    conn.commit()
+    return "success"

@@ -134,16 +134,7 @@ def drop():
 
 
 if __name__ == '__main__':
-    # python3 app.py <type> <file_path>
-
-    # rating - python3 app.py ratings /Users/mengyuan/Downloads/MovieData/title.ratings.tsv
-    # wirter and director - python3 app.py people /Users/mengyuan/Downloads/MovieData/title.crew.tsv
-    # people info - python3 app.py info /Users/mengyuan/Downloads/MovieData/name.basics.tsv
-    # movie - python3 app.py movie /Users/mengyuan/Downloads/MovieData/title.basics.tsv
-
-    #print(sys.argv)
-    #table = sys.argv[1]
-    #path = sys.argv[2]
     drop()
     create_table()
     insert_data()
+    print("complete loading")
