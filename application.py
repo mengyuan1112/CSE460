@@ -1,5 +1,7 @@
 import json
 from flask import Flask, render_template, request
+from flask_cors import CORS
+
 import feature.account
 import selection
 from flask_cors import CORS
