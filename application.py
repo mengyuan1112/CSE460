@@ -3,25 +3,44 @@ from flask import Flask, render_template, request
 import feature.account
 import selection
 
+
 app = Flask(__name__)
 
 @app.route("/signup", methods=['POST'])
 def register():
     data = json.loads(request.get_data(as_text=True))
+    print(data)
     answer=feature.account.register(data['username'],data['password'])
-    return answer
+    print(answer)
+    return json.dumps(answer)
 
 @app.route("/login", methods=['POST','GET'])
 def login():
     data = json.loads(request.get_data(as_text=True))
     answer=feature.account.login(data['username'],data['password'])
-    return answer
+    return json.dumps(answer)
+
+@app.route("/update", methods=['POST','GET'])
+def update():
+    data = json.loads(request.get_data(as_text=True))
+    answer=feature.account.update(data['username'],data['password'],data['newPassword'])
+    return json.dumps(answer)
+
+@app.route("/delete", methods=['POST','GET'])
+def delete():
+    data = json.loads(request.get_data(as_text=True))
+    answer=feature.account.delete(data['username'],data['password'])
+    return json.dumps(answer)
+
 
 @app.route("/select", methods=["GET"])
 def select():
     data = json.loads(request.get_data(as_text=True))
     result = selection.generate_result(data)
     return result
+
+
+CORS(app)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8999)
