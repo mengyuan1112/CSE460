@@ -2,6 +2,7 @@ import json
 from flask import Flask, render_template, request
 import feature.account
 import selection
+from flask_cors import CORS
 
 
 app = Flask(__name__)
@@ -33,11 +34,15 @@ def delete():
     return json.dumps(answer)
 
 
-@app.route("/select", methods=["GET"])
+@app.route("/select", methods=["POST"])
 def select():
     data = json.loads(request.get_data(as_text=True))
+    print(data)
     result = selection.generate_result(data)
-    return result
+    print(result)
+    if len(result) == 0:
+        result = "No movie satisfie"
+    return json.dump(result)
 
 
 CORS(app)

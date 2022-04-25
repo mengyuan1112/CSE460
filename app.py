@@ -16,7 +16,7 @@ def home():
 '''
 conn = psycopg2.connect(
     host="localhost",
-    database="postgres2",
+    database="postgres",
     user="postgres",
     password="123"
 )
