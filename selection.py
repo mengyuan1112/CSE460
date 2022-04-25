@@ -48,8 +48,10 @@ def generate_result(data):
     print(result)
     return_list = []
     for i in result:
+        i = list(i)
+        for j in range(0, len(i)):
+            i[j] =  str(i[j]) + ", "
         a = list(i)
         return_list.append(a)
-
-    return json.dumps(return_list)
+    return return_list
     pass

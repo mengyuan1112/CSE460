@@ -14,6 +14,7 @@ export default function Home() {
   var [rating, setRating] = useState(""); 
   var [genres, setGenres] = useState("");
   var [error,setError] = useState('');
+  const [returnVal, setReturnVal] = useState(new Array());
 
   const handleOnChange = (position) => {
     const updatedCheckedState = checkedState.map((item, index) =>
@@ -37,7 +38,7 @@ export default function Home() {
     .then(response => response.json()
     .then(data => {
         console.log(data)
-        setError(data)
+        setReturnVal(data)
         })
     )
 }
@@ -86,7 +87,10 @@ export default function Home() {
       <div className="button">
       <button onClick={handleSubmit}> Check </button>
       </div>
-      {<h3 className="error"> {error} </h3> }
+      {returnVal.map(function(item, i){
+        return <h3 className="error"> {item} </h3> 
+        // {<h3 className="error"> {i} </h3> }
+      })}
       
     </div>
   );

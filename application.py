@@ -1,7 +1,5 @@
 import json
 from flask import Flask, render_template, request
-from flask_cors import CORS
-
 import feature.account
 import selection
 from flask_cors import CORS
@@ -41,10 +39,11 @@ def select():
     data = json.loads(request.get_data(as_text=True))
     print(data)
     result = selection.generate_result(data)
-    print(result)
+    print("this is len: " +  str(len(result)))
     if len(result) == 0:
-        result = "No movie satisfie"
-    return json.dump(result)
+        return json.dumps(["No movie satisfie"])
+    print(result)
+    return json.dumps(result)
 
 
 CORS(app)
