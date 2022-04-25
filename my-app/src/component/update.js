@@ -8,6 +8,7 @@ import "./Reg.css";
 export default function Reg(){
     var [email, setEmail] = useState("");
     var [pwd, setPwd] = useState("");
+    var [newpwd, setNewPwd] = useState("");
     var [error,setError] = useState('');
     var [isValid, setIsValid] = useState(false);
     const regex = new RegExp(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/);
@@ -20,8 +21,8 @@ export default function Reg(){
     function handleSubmit(event) {
         event.preventDefault();
         console.log("hello")
-        const postBody = {method: 'Post', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({"username": email, "password": pwd})};
-        fetch('http://localhost:8999/signup', postBody)
+        const postBody = {method: 'Post', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({"username": email, "password": pwd, "newPassword": newpwd})};
+        fetch('http://localhost:8999/update', postBody)
         .then(response => response.json()
         .then(data => {
             console.log(data)
@@ -32,7 +33,7 @@ export default function Reg(){
 
     return (
         <div className="register">
-            <h1>Register</h1>
+            <h1>Update</h1>
             <Form onSubmit = {handleSubmit}>
                 <Form.Group size = "lg" controlId = "email">
                     <Form.Label>Email</Form.Label>
@@ -53,6 +54,16 @@ export default function Reg(){
                         onChange = {(e) => setPwd(e.target.value)}
                     />
                 </Form.Group>
+                
+                <Form.Group size = "lg" controlId = "newpwd">
+                    <Form.Label>ew Password</Form.Label>
+                    <Form.Control
+                        autoFocus
+                        type = "newpwd"
+                        value = {newpwd}
+                        onChange = {(e) => setNewPwd(e.target.value)}
+                    />
+                </Form.Group>
 
                 <Link to = {'/Login'} >
                     <Button>
@@ -62,7 +73,7 @@ export default function Reg(){
 
                 <div className="hello">
                     <Button block size = "lg" type = "submit" disabled={validateEmail(email)}>
-                        Register
+                        Update Password
                     </Button>
                 {<h3 className="error"> {error} </h3> }
                 </div>
