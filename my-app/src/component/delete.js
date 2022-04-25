@@ -21,7 +21,7 @@ export default function Reg(){
         event.preventDefault();
         console.log("hello")
         const postBody = {method: 'Post', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({"username": email, "password": pwd})};
-        fetch('http://localhost:8999/signup', postBody)
+        fetch('http://localhost:8999/delete', postBody)
         .then(response => response.json()
         .then(data => {
             console.log(data)
@@ -32,7 +32,7 @@ export default function Reg(){
 
     return (
         <div className="register">
-            <h1>Register</h1>
+            <h1>Delete Account</h1>
             <Form onSubmit = {handleSubmit}>
                 <Form.Group size = "lg" controlId = "email">
                     <Form.Label>Email</Form.Label>
@@ -62,7 +62,7 @@ export default function Reg(){
 
                 <div className="hello">
                     <Button block size = "lg" type = "submit" disabled={validateEmail(email)}>
-                        Register
+                        Delete Account
                     </Button>
                 {<h3 className="error"> {error} </h3> }
                 </div>
