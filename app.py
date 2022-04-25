@@ -16,7 +16,7 @@ def home():
 '''
 conn = psycopg2.connect(
     host="localhost",
-    database="postgres",
+    database="postgres2",
     user="postgres",
     password="123"
 )
@@ -125,12 +125,13 @@ def insert_data():
 
 def drop():
     cursor = conn.cursor()
-    sql = "drop TABLE IF EXISTS Movie"
+    sql = "drop TABLE IF EXISTS Movie;"
     cursor.execute(sql)
     conn.commit()
-    sql = "drop TABLE IF EXISTS Faculty"
+    sql = "drop TABLE IF EXISTS Faculty;"
     cursor.execute(sql)
     conn.commit()
+    return
 
 
 if __name__ == '__main__':
