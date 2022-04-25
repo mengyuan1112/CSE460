@@ -1,9 +1,8 @@
 import json
-
 from flask import Flask, render_template, request
-from flask_cors import CORS
 import feature.account
-import json
+import selection
+
 
 app = Flask(__name__)
 
@@ -33,7 +32,16 @@ def delete():
     answer=feature.account.delete(data['username'],data['password'])
     return json.dumps(answer)
 
+
+@app.route("/select", methods=["GET"])
+def select():
+    data = json.loads(request.get_data(as_text=True))
+    result = selection.generate_result(data)
+    return result
+
+
 CORS(app)
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8999)
     app.run(debug=True)
