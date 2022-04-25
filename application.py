@@ -1,5 +1,7 @@
 import json
 from flask import Flask, render_template, request
+from flask_cors import CORS
+
 import feature.account
 import selection
 
@@ -33,7 +35,7 @@ def delete():
     return json.dumps(answer)
 
 
-@app.route("/select", methods=["GET"])
+@app.route("/select", methods=["POST"])
 def select():
     data = json.loads(request.get_data(as_text=True))
     result = selection.generate_result(data)
