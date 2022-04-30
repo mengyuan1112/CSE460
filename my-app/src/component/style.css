@@ -10,9 +10,20 @@
 .put {
   text-align: left;
 }
+
+.insert {
+  text-align: left;
+}
 .button {
   text-align: left;
 }
+
+
+.delete {
+  text-align: left;
+}
+
+
   
   .item {
     margin-top: 0.3rem;
