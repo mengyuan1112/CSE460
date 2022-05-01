@@ -70,8 +70,6 @@ function handleInsert(event) {
   const postBody = {method: 'Post', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({
     "movieName": insertmovieName != "" ? insertmovieName : null,
     "movieYear":insertmovieYear != "" ? insertmovieYear : null ,
-    "director": insertdirector != "" ? insertdirector : null,
-    "writer": insertwriter != "" ? insertwriter : null,
     "rating": insertrating != "" ? insertrating : null,
     "genres":  insertgenres != "" ? insertgenres : null
   })};
@@ -137,8 +135,6 @@ function handleInsert(event) {
           </div>
           <div><input onChange ={(e) => setinsertMovieYear(e.target.value)} type="text" placeholder="range" /></div>
           
-          <div><input onChange ={(e) => setinsertDirector(e.target.value)} type="text" placeholder="Director" /></div>
-          <div><input onChange ={(e) => serinsertWriter(e.target.value)} type="text" placeholder="Writer" /></div>
           <div><input onChange ={(e) => setinsertRating(e.target.value)} type="text" placeholder="rating" /></div>
           <div><input onChange ={(e) => setinsertGenres(e.target.value)} type="text" placeholder="genre" /></div>
         </div>
