@@ -6,15 +6,17 @@ import csv
 import sys
 import flask
 
-conn = psycopg2.connect(
-    host="localhost",
-    database="postgres",
-    user="postgres",
-    password="123"
-)
-cursor = conn.cursor()
+
+
 
 def generate_result(data):
+    conn = psycopg2.connect(
+        host="localhost",
+        database="postgres",
+        user="postgres",
+        password="123"
+    )
+    cursor = conn.cursor()
     print(data)
     movieName = data["movieName"]
     startYear = data["movieYear"]
@@ -50,8 +52,8 @@ def generate_result(data):
     for i in result:
         i = list(i)
         for j in range(0, len(i)):
-            i[j] =  str(i[j]) + ", "
+            i[j] = str(i[j]) + ", "
         a = list(i)
         return_list.append(a)
+    conn.close()
     return return_list
-    pass
